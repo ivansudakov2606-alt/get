@@ -9,4 +9,3 @@ while True:
     GPIO.output(led, state)
     state = not state
     time.sleep(period)
-    
