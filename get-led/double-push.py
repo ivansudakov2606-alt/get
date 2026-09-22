@@ -2,10 +2,8 @@ import RPi.GPIO as GPIO
 import time
 GPIO.setmode(GPIO.BCM)
 leds = [16, 12, 25, 17, 27, 23, 22, 24]
-for led in leds:
-    GPIO.setup(led, GPIO.OUT)
-for led in leds:
-    GPIO.output(led, 0)
+GPIO.setup(leds, GPIO.OUT)
+GPIO.output(leds, 0)
 
 up = 9
 down = 10
