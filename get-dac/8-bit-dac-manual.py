@@ -31,7 +31,7 @@ try:
             number_to_dac(number)
 
         except ValueError:
-            print("Вы ввели не число. Попробуйте ещё раз\n")
+            print("Вы ввели не число. Попробуйте ещё раз")
 
 finally:
     GPIO.output(dac_bits, 0)
