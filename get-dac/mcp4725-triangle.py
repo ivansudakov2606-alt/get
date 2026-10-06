@@ -16,7 +16,7 @@ if __name__ == "__main__":
         dt = 1.0 / sampling_frequency
 
         while True:
-            normalized = sg.get_sin_wave_amplitude(signal_frequency, t)
+            normalized = sg.get_triangle_wave_amplitude(signal_frequency, t)
             voltage = normalized * amplitude
 
             dac.set_voltage(voltage)

@@ -1,15 +1,15 @@
 import smbus
 
-
 class MCP4725:
     def __init__(self, dynamic_range, address=0x61, verbose=True):
         self.bus = smbus.SMBus(1)
+
         self.address = address
         self.wm = 0x00
-        self.pds = 0x00 
-        self.verbose = verbose
-        self.dynamic_range = dynamic_range
+        self.pds = 0x00
 
+        self.verbose = verbose
+        self.dynamic_range = dynamic_range 
 
     def deinit(self):
         self.bus.close()
@@ -35,15 +35,13 @@ class MCP4725:
             )
 
     def set_voltage(self, voltage):
-        u_min, u_max = self.dynamic_range
-
-        if not (u_min <= voltage <= u_max):
-            print(f"Напряжение выходит за динамический диапазон ЦАП ({u_min:.2f} - {u_max:.2f} В)")
+        if not (0.0 <= voltage <= self.dynamic_range):
+            print(f"Напряжение выходит за динамический диапазон ЦАП (0.00 - {self.dynamic_range:.2f} В)")
             print("Устанавливаем 0.0 В")
             self.set_number(0)
             return
 
-        number = int(round((voltage - u_min) / (u_max - u_min) * 4095))
+        number = int(round(voltage / self.dynamic_range * 4095))
         number = max(0, min(4095, number))
 
         self.set_number(number)
@@ -54,7 +52,7 @@ class MCP4725:
 
 if __name__ == "__main__":
     try:
-        dac = MCP4725(dynamic_range=(0.0, 5.0), verbose=True)
+        dac = MCP4725(dynamic_range=5.0, verbose=True)
 
         while True:
             try:
