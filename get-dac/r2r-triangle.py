@@ -12,7 +12,7 @@ gpio_bits = [16, 20, 21, 25, 26, 17, 27, 22]
 
 if __name__ == "__main__":
     try:
-        dac = r2r.R2R_DAC(gpio_bits, dynamic_range=amplitude, verbose=False)
+        dac = r2r.R2R_DAC(gpio_bits, dynamic_range=3.3, verbose=False)
 
         t = 0.0
         dt = 1.0 / sampling_frequency

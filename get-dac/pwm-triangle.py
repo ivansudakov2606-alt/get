@@ -13,7 +13,7 @@ pwm_frequency = 500
 
 if __name__ == "__main__":
     try:
-        dac = pwm.PWM_DAC(gpio_pin, pwm_frequency, dynamic_range=amplitude, verbose=False)
+        dac = pwm.PWM_DAC(gpio_pin, pwm_frequency, dynamic_range=3.3, verbose=False)
 
         t = 0.0
         dt = 1.0 / sampling_frequency
