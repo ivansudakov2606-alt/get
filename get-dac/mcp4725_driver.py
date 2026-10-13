@@ -31,7 +31,7 @@ class MCP4725:
         if self.verbose:
             print(
                 f"Число: {number}, отправленные по I2C данные: "
-                f"[0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]\n"
+                f"[0x{(self.address << 1):02X}, 0x{first_byte:02X}, 0x{second_byte:02X}]"
             )
 
     def set_voltage(self, voltage):
@@ -47,7 +47,7 @@ class MCP4725:
         self.set_number(number)
 
         if self.verbose:
-            print(f"voltage = {voltage:.2f} В -> number = {number}")
+            print(f"напряжение = {voltage:.2f} В -> число = {number}")
 
 
 if __name__ == "__main__":
@@ -60,7 +60,7 @@ if __name__ == "__main__":
                 dac.set_voltage(voltage)
 
             except ValueError:
-                print("Вы ввели не число. Попробуйте ещё раз\n")
+                print("Вы ввели не число. Попробуйте ещё раз")
 
     finally:
         dac.deinit()

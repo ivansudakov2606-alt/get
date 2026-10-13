@@ -30,12 +30,12 @@ class PWM_DAC:
         self.pwm.ChangeDutyCycle(duty)
 
         if self.verbose:
-            print(f"voltage = {voltage:.2f} В -> duty = {duty:.2f}%")
+            print(f"напряжение = {voltage:.2f} В -> duty = {duty:.2f}%")
 
 
 if __name__ == "__main__":
     try:
-        dac = PWM_DAC(12, 500, 3.185, True)
+        dac = PWM_DAC(12, 5000, 3.185, True)
 
         while True:
             try:
@@ -43,7 +43,7 @@ if __name__ == "__main__":
                 dac.set_voltage(voltage)
 
             except ValueError:
-                print("Вы ввели не число. Попробуйте ещё раз\n")
+                print("Вы ввели не число. Попробуйте ещё раз")
 
     finally:
         dac.deinit()

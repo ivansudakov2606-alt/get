@@ -4,8 +4,8 @@ import time
 
 
 amplitude = 3.2
-signal_frequency = 10
-sampling_frequency = 1000
+signal_frequency = 1
+sampling_frequency = 100
 
 gpio_bits = [16, 20, 21, 25, 26, 17, 27, 22]
 
