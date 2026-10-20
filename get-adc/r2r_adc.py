@@ -36,16 +36,46 @@ class R2R_ADC:
 
             if self.verbose:
                 print(f"код={number:3d}, компаратор={comp}")
+
             if comp:
                 return number
 
         return 255
 
+    def successive_approximation_adc(self):
+        low = 0
+        high = 255
+
+        while low < high:
+            mid = (low + high) // 2
+
+            self.number_to_dac(mid)
+            time.sleep(self.compare_time)
+
+            comp = GPIO.input(self.comp_gpio)
+
+            if self.verbose:
+                print(f"low={low:3d}, high={high:3d}, mid={mid:3d}, компаратор={comp}")
+
+            if comp:
+                high = mid
+            else:
+                low = mid + 1
+
+        return low
+
     def get_sc_voltage(self):
+        """Напряжение по методу последовательного счёта."""
         code = self.sequential_counting_adc()
         return code * self.dynamic_range / 255.0
 
+    def get_sar_voltage(self):
+        """Напряжение по методу последовательного приближения."""
+        code = self.successive_approximation_adc()
+        return code * self.dynamic_range / 255.0
+
     def cleanup(self):
+        """Выставляет 0 на ЦАП и освобождает GPIO."""
         if getattr(self, "_closed", False):
             return
 
@@ -69,9 +99,9 @@ if __name__ == "__main__":
         adc = R2R_ADC(DYNAMIC_RANGE, compare_time=0.01, verbose=False)
 
         while True:
-            voltage = adc.get_sc_voltage()
-            print(f"Напряжение: {voltage:.3f} В")
-            time.sleep(0.01)
+            voltage = adc.get_sar_voltage()
+            print(f"Напряжение SAR: {voltage:.3f} В")
+            time.sleep(0.5)
 
     except KeyboardInterrupt:
         pass
