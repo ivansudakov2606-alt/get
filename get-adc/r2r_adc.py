@@ -65,17 +65,14 @@ class R2R_ADC:
         return low
 
     def get_sc_voltage(self):
-        """Напряжение по методу последовательного счёта."""
         code = self.sequential_counting_adc()
         return code * self.dynamic_range / 255.0
 
     def get_sar_voltage(self):
-        """Напряжение по методу последовательного приближения."""
         code = self.successive_approximation_adc()
         return code * self.dynamic_range / 255.0
 
     def cleanup(self):
-        """Выставляет 0 на ЦАП и освобождает GPIO."""
         if getattr(self, "_closed", False):
             return
 
