@@ -27,7 +27,7 @@ class MCP3021:
 
         lower_data_byte = data >> 8
         upper_data_byte = data & 0xFF
-        number = (upper_data_byte << 2) | (lower_data_byte >> 6)
+        number = (upper_data_byte << 6) | (lower_data_byte >> 2)
 
         if self.verbose:
             print(

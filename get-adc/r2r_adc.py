@@ -47,7 +47,7 @@ class R2R_ADC:
         high = 255
 
         while low < high:
-            mid = (low + high) // 2
+            mid = (low + high) // 2               
 
             self.number_to_dac(mid)
             time.sleep(self.compare_time)
@@ -99,7 +99,7 @@ if __name__ == "__main__":
             voltage = adc.get_sar_voltage()
             print(f"Напряжение SAR: {voltage:.3f} В")
             time.sleep(0.5)
-
+ 
     except KeyboardInterrupt:
         pass
 
